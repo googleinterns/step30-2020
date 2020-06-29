@@ -1,3 +1,4 @@
+// Loads in the iFrame Player API code asynchronously
 var tag = document.createElement('script');
 
 tag.src = "https://www.youtube.com/iframe_api";
@@ -5,8 +6,7 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// 3. This function creates an <iframe> (and YouTube player)
-//    after the API code downloads.
+// Create the player object
 var player;
 
 function onYouTubeIframeAPIReady() {
@@ -15,26 +15,25 @@ function onYouTubeIframeAPIReady() {
         width: '640',
         videoId: 'QSQwZlRMVAM',
         events: {
+        // Adds event listeners for the player and maps the function that will triggered
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
         }
         });
 }
 
-// 4. The API will call this function when the video player is ready.
+// When the video player is ready, the API will call this function to start playing the video
 function onPlayerReady(event) {
     event.target.playVideo();
 }
 
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
-var done = false;
+// When the player state is changed, the API calls this function
 
 function onPlayerStateChange(event) {
     console.log(player.getPlayerState());
 }
 
+// Functions that change the playback state of the player
 function stopVideo() {
     player.stopVideo();
 }
@@ -43,6 +42,7 @@ function pauseVideo() {
     player.pauseVideo();
 }
 
+// Function to load the title of the current video
 function loadVideoInfo() {
 
     var titleElement = document.getElementById('video-title');
