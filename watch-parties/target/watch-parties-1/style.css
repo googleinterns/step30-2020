@@ -1,17 +1,15 @@
-div{
-    text-align: center;
-}
-
 #chat {
     width: 200px;
     float: right;
     align-content: left;
     align-self: right;
+    height: 100vh;
+    background-color: red;
 }
 
 #chatlog {
-    height: 1152px;
     width: 400px;
+    height: 90vh;
     background-color: #faf2f0;
     padding: 0px;
     border-style: solid;
