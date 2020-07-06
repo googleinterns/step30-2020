@@ -22,15 +22,23 @@ function onYouTubeIframeAPIReady() {
         });
 }
 
-// When the video player is ready, the API will call this function to start playing the video
-function onPlayerReady(event) {
-    event.target.playVideo();
-}
-
 // When the player state is changed, the API calls this function
 
 function onPlayerStateChange(event) {
-    console.log(player.getPlayerState());
+    var status = player.getPlayerState();
+
+    $.ajax({
+        url: 'sync',
+        method: 'POST',
+        data: {status : status},
+        success    : function(resultText){
+            $('#result').html(resultText);
+            setTimeout(() => { console.log("Changed playback state"); }, 1000)
+        },
+        error : function(jqXHR, exception){
+            console.log('Error occured!!');
+        }
+    });
 }
 
 // Functions that change the playback state of the player
@@ -42,9 +50,67 @@ function pauseVideo() {
     player.pauseVideo();
 }
 
+function playVideo() {
+    player.playVideo();
+}
+
+// Function that contains the logic for changing the playback state
+function updatePlayer(status){
+    if(status != player.getPlayerState() ){
+        setTimeout(() => { console.log("Received change in playback state"); }, 1000)
+        if(status == 1){
+            playVideo();
+        } else if (status == 2){
+            pauseVideo();
+        } else if (status == -1){
+            playVideo();
+        }
+    }
+}
+
 // Function to load the title of the current video
 function loadVideoInfo() {
 
     var titleElement = document.getElementById('video-title');
     titleElement.innerText = "Title";
+}
+
+// Functions for polling 
+function shortPolling() {
+
+    const textViewCount = document.getElementById('playback-status');
+
+    // Short Polling
+    setInterval(function() { 
+        fetch('/sync').then(response => response.json()).then((updater) => {
+            textViewCount.textContent = "Playback State: " + updater.status;
+            updatePlayer(updater.status);
+        });
+    }, 500)
+}
+
+function longPolling() {
+
+    const textViewCount = document.getElementById('playback-status');
+
+    // Long Polling
+     $.ajax({ 
+        url: "sync",
+        success: function(updater){
+            textViewCount.textContent = "Playback State: " + updater.status;
+            updatePlayer(updater.status);
+        },
+        error: function(err) {
+            console.log("Error");
+        },
+        type: "GET", 
+        dataType: "json", 
+        complete: longPolling,
+        timeout: 60000 // timeout every one minute
+    });
+}
+
+// When the video player is ready, the API will call this function
+function onPlayerReady(event) {
+    longPolling();
 }
