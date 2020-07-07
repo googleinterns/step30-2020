@@ -46,5 +46,5 @@ function pauseVideo() {
 function loadVideoInfo() {
 
     var titleElement = document.getElementById('video-title');
-    titleElement.innerText = "Title";
+    titleElement.innerText = "eggdog quarantine";
 }
