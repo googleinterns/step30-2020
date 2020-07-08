@@ -1,13 +1,13 @@
-
-document.getElementById("sendButton").onclick = function() {addComment()}; // function triggered by the button
+//Timer under construction
+document.getElementById("chatlog").onload = function() {setInterval(window.alert("hi"), 5000)}; 
+document.getElementById("sendButton").onclick = function() {addNewComment()}; 
 var formattedComment = "";
 
-// Self explanitory. Reads a comment from the index.html file and 
-// properly formats it.
-function formatNewComment() {
+function addNewComment() {
     var comment = document.getElementById("submitted-comment").value;
     if (comment != "") {
         formattedComment += "<br /><li>" + comment + "</li><br />";
+        localStorage.setItem("commentStorageKey", formattedComment); 
     }
 }
 
@@ -18,17 +18,19 @@ function lmao() {
     });
 } 
 
-// Uses AJAX and localStorage to add the comment to the page and
-// store it, respectively.
-function addComment() {
+function loadComments() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      formatNewComment(); 
-      localStorage.setItem("commentStorageKey", formattedComment); 
+      console.log("is this running?");
       document.getElementById("chatlog").innerHTML = localStorage.getItem("commentStorageKey");
     }
   };
   xhttp.open("GET", "ajax_test.txt", true);
   xhttp.send();
+}
+
+function addTestComment() {
+    window.alert("hi");
+    document.getElementById("chatlog").innerHTML = "<p>lol</p>";
 }
