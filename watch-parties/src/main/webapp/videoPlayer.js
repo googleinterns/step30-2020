@@ -72,13 +72,12 @@ function updatePlayer(status){
 
 // Function to load the title of the current video
 function loadVideoInfo() {
-
     var titleElement = document.getElementById('video-title');
     titleElement.innerText = "Title";
-
 }
 
 function longPolling() {
+    const longPollingTimeoutMS = 60000;
 
     // Long Polling
      $.ajax({ 
@@ -92,7 +91,7 @@ function longPolling() {
         type: "GET", 
         dataType: "json", 
         complete: longPolling,
-        timeout: 60000 // timeout after one minute
+        timeout: longPollingTimeoutMS // timeout after one minute
     });
 }
 
