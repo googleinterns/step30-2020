@@ -26,14 +26,17 @@ import java.io.BufferedReader;
 @WebServlet("/sync")
 public class VideoSyncServlet extends HttpServlet {
 
+    // See onStateChange docs for video state values:
+    // https://developers.google.com/youtube/iframe_api_reference#Events
+
     int videoStatus = 0;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         
-        response.setContentType("application/json;");
+        response.setContentType("application/json");
         response.getWriter().println("{\"status\": \"" + videoStatus + "\"}");
-        
+
     }
 
     @Override

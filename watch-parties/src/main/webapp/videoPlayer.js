@@ -16,6 +16,9 @@ function onYouTubeIframeAPIReady() {
         videoId: 'QSQwZlRMVAM',
         events: {
         // Adds event listeners for the player and maps the function that will triggered
+        // See Events docs for player event listeners:
+        // https://developers.google.com/youtube/iframe_api_reference#Events
+
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
         }
@@ -23,7 +26,6 @@ function onYouTubeIframeAPIReady() {
 }
 
 // When the player state is changed, the API calls this function
-
 function onPlayerStateChange(event) {
     var status = player.getPlayerState();
 
@@ -33,10 +35,10 @@ function onPlayerStateChange(event) {
         data: {status : status},
         success    : function(resultText){
             $('#result').html(resultText);
-            setTimeout(() => { console.log("Changed playback state"); }, 1000)
+            setTimeout(() => { console.log("Changed playback state"); }, 1000);
         },
         error : function(jqXHR, exception){
-            console.log('Error occured!!');
+            console.log('Error occured');
         }
     });
 }
@@ -57,7 +59,7 @@ function playVideo() {
 // Function that contains the logic for changing the playback state
 function updatePlayer(status){
     if(status != player.getPlayerState() ){
-        setTimeout(() => { console.log("Received change in playback state"); }, 1000)
+        setTimeout(() => { console.log("Received change in playback state"); }, 1000);
         if(status == 1){
             playVideo();
         } else if (status == 2){
@@ -73,31 +75,15 @@ function loadVideoInfo() {
 
     var titleElement = document.getElementById('video-title');
     titleElement.innerText = "Title";
-}
 
-// Functions for polling 
-function shortPolling() {
-
-    const textViewCount = document.getElementById('playback-status');
-
-    // Short Polling
-    setInterval(function() { 
-        fetch('/sync').then(response => response.json()).then((updater) => {
-            textViewCount.textContent = "Playback State: " + updater.status;
-            updatePlayer(updater.status);
-        });
-    }, 500)
 }
 
 function longPolling() {
-
-    const textViewCount = document.getElementById('playback-status');
 
     // Long Polling
      $.ajax({ 
         url: "sync",
         success: function(updater){
-            textViewCount.textContent = "Playback State: " + updater.status;
             updatePlayer(updater.status);
         },
         error: function(err) {
