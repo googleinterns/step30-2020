@@ -1,15 +1,3 @@
-#player{
-    padding: 50px;
-    float: left;
-}
-
-#video-info{
-    color: Black;
-    padding-left: 50px;
-    float: left;
-}
-
-
 #chat {
     width: 200px;
     float: right;
