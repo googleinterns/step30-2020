@@ -30,10 +30,10 @@ public class VideoSyncServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
         response.setContentType("application/json;");
-
-        UserService userService = UserServiceFactory.getUserService();
         response.getWriter().println("{\"status\": \"" + videoStatus + "\"}");
+        
     }
 
     @Override
@@ -41,5 +41,6 @@ public class VideoSyncServlet extends HttpServlet {
 
         String statusString = request.getParameter("status");
         videoStatus = Integer.parseInt(statusString);
+
     }
 }

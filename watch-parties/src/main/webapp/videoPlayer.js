@@ -106,7 +106,7 @@ function longPolling() {
         type: "GET", 
         dataType: "json", 
         complete: longPolling,
-        timeout: 60000 // timeout every one minute
+        timeout: 60000 // timeout after one minute
     });
 }
 
