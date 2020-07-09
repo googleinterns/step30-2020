@@ -1,10 +1,12 @@
 #player{
     padding: 50px;
+    float:left;
 }
 
 #video-info{
     color: Black;
     padding-left: 50px;
+    float:left;
 }
 
 
@@ -15,6 +17,7 @@
     align-self: right;
     height: 100vh;
     background-color: red;
+    position: right;
 }
 
 #chatlog {
@@ -24,6 +27,7 @@
     padding: 0px;
     border-style: solid;
     border-width: 1px;
+    position: right;
 }
 
 #chatlog > li {
@@ -37,9 +41,10 @@
     width: 400px;
     /*float: right; */
     padding: 0px;
-    
+    position: right;
 }
 
 #new-comment > li {
     vertical-align: middle;
+    list-style-type: none;
 }

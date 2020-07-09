@@ -8,7 +8,13 @@ function addNewComment() {
     if (comment != "") {
         formattedComment += "<br /><li>" + comment + "</li><br />";
         localStorage.setItem("commentStorageKey", formattedComment); 
+        document.getElementById("chatlog").innerHTML = localStorage.getItem("commentStorageKey");
+        document.getElementById("submitted-comment").value = "";
     }
+    //setInterval(window.alert("hi"), 2);
+}
+function window() {
+    window.alert("hi");
 }
 
 // Just a servlet connector for now.
