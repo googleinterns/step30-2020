@@ -10,8 +10,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 
 // Create constant variables for timeout functions
-const oneMinuteMS = 60000; 
-const oneSecondMS = 1000;
+const longPollingTimeOutMS = 60000; 
+const timeOutMS = 1000;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
@@ -93,7 +93,7 @@ function longPolling() {
         type: "GET", 
         dataType: "json", 
         complete: longPolling,
-        timeout: oneMinuteMS // timeout after one minute
+        timeout: longPollingTimeOutMS // timeout after one minute
     });
 }
 
