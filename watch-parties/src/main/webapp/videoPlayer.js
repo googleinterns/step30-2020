@@ -39,7 +39,7 @@ function onPlayerStateChange(event) {
         data: {status : status},
         success    : function(resultText){
             $('#result').html(resultText);
-            setTimeout(() => { console.log("Changed playback state"); }, oneSecondMS);
+            setTimeout(() => { console.log("Changed playback state"); }, timeOutMS);
         },
         error : function(jqXHR, exception){
             console.log('Error occured');
@@ -63,7 +63,7 @@ function playVideo() {
 // Function that contains the logic for changing the playback state
 function updatePlayer(status){
     if(status != player.getPlayerState() ){
-        setTimeout(() => { console.log("Received change in playback state"); }, oneSecondMS);
+        setTimeout(() => { console.log("Received change in playback state"); }, timeOutMS);
         if(status == 1){
             playVideo();
         } else if (status == 2){
