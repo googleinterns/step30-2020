@@ -8,6 +8,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // Create the player object
 var player;
+const oneMinuteMS = 60000; 
+const oneSecondMS = 1000;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
@@ -35,7 +37,7 @@ function onPlayerStateChange(event) {
         data: {status : status},
         success    : function(resultText){
             $('#result').html(resultText);
-            setTimeout(() => { console.log("Changed playback state"); }, 1000);
+            setTimeout(() => { console.log("Changed playback state"); }, oneSecondMS);
         },
         error : function(jqXHR, exception){
             console.log('Error occured');
@@ -59,7 +61,7 @@ function playVideo() {
 // Function that contains the logic for changing the playback state
 function updatePlayer(status){
     if(status != player.getPlayerState() ){
-        setTimeout(() => { console.log("Received change in playback state"); }, 1000);
+        setTimeout(() => { console.log("Received change in playback state"); }, oneSecondMS);
         if(status == 1){
             playVideo();
         } else if (status == 2){
@@ -77,8 +79,6 @@ function loadVideoInfo() {
 }
 
 function longPolling() {
-    const longPollingTimeoutMS = 60000;
-
     // Long Polling
      $.ajax({ 
         url: "sync",
@@ -91,7 +91,7 @@ function longPolling() {
         type: "GET", 
         dataType: "json", 
         complete: longPolling,
-        timeout: longPollingTimeoutMS // timeout after one minute
+        timeout: oneMinuteMS // timeout after one minute
     });
 }
 
