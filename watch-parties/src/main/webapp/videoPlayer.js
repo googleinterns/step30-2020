@@ -8,6 +8,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // Create the player object
 var player;
+
+// Create constant variables for timeout functions
 const oneMinuteMS = 60000; 
 const oneSecondMS = 1000;
 
