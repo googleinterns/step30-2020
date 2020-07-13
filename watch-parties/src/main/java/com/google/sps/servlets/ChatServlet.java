@@ -15,7 +15,7 @@ public class ChatServlet extends HttpServlet {
     ArrayList<Chat> comments = new ArrayList<>();
  
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String comment = request.getParameter("submitted-comment");
         Date timestamp = new Date();
         int authorID = 3;
@@ -28,6 +28,6 @@ public class ChatServlet extends HttpServlet {
             response.getWriter().println(thisComment.toJSON());
         }
  
-        //System.out.println(justSettingUp);
+        //System.out.println(justSettingUp + "");
     }
 }
