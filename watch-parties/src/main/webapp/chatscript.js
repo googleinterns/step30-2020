@@ -11,7 +11,26 @@ function addNewComment() {
         document.getElementById("chatlog").innerHTML = localStorage.getItem("commentStorageKey");
         document.getElementById("submitted-comment").value = "";
     }
+
+    $.ajax({
+        url: '/chatmessages',
+        method: 'POST',
+        data: {
+            
+        },
+        success    : function(resultText){
+            //$('#result').html(resultText);
+            //setTimeout(() => { console.log("it worked"); }, timeOutMS);
+            console.log("it worked");
+        },
+        error : function(jqXHR, exception){
+            console.log('Error occured');
+        }
+    });
+
 }
+
+
 
 // Just a servlet connector for now.
 function lmao() {
