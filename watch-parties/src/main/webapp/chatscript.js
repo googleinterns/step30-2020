@@ -12,11 +12,12 @@ function addNewComment() {
         document.getElementById("submitted-comment").value = "";
     }
 
-    $.ajax({
-        url: '/chatmessages',
+    /*$.ajax({
+        url: '/chatstorage',
         method: 'POST',
         data: {
-            
+            console . log(comments);
+            console.log("it worked");
         },
         success    : function(resultText){
             //$('#result').html(resultText);
@@ -24,9 +25,9 @@ function addNewComment() {
             console.log("it worked");
         },
         error : function(jqXHR, exception){
-            console.log('Error occured');
+            console.log('Errror occured');
         }
-    });
+    });*/
 
 }
 

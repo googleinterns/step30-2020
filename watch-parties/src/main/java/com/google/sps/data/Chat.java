@@ -1,14 +1,15 @@
 package com.google.sps.data;
 import java.util.Date;
+//import java.sql.Timestamp;
  
 /** An item on a todo list. */
 public final class Chat {
  
   private String message;
-  private int authorID;
-  private Date timestamp;
+  private long authorID;
+  private long timestamp;
  
-  public Chat(String message, int authorID, Date timestamp) {
+  public Chat(String message, long authorID, long timestamp) {
     this.message = message;
     this.authorID = authorID;
     this.timestamp = timestamp;
@@ -25,11 +26,11 @@ public final class Chat {
     this.message = message;
   }
  
-  public void setAuthorId(int authorID) {
+  public void setAuthorId(long authorID) {
     this.authorID = authorID;
   }
  
-  public void setTimestamp(Date timestamp) {
+  public void setTimestamp(long timestamp) {
     this.timestamp = timestamp;
   }
  
@@ -37,11 +38,11 @@ public final class Chat {
     return message;
   }
  
-  public int getAuthorId() {
+  public long getAuthorId() {
     return authorID;
   }
  
-  public Date getTimestamp() {
+  public long getTimestamp() {
     return timestamp;
   }
 }
