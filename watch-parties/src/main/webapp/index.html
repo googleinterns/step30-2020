@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="videoPlayer.js"></script>
-        <link rel="stylesheet" href="videoPlayer.css">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body onload="loadVideoInfo()">
-        <div id="player"></div>
+ <head>
+    <meta charset="UTF-8">
+    <title>Watch Parties</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatstyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="videoPlayer.js"></script>
+    <link rel="stylesheet" href="videoPlayer.css">
+    <script type="module" src="script.js"></script>
+    <script type="module" src="chatscript.js"></script>
+  </head>
+  <body onload="loadVideoInfo()">
+      <div id="player"></div>
 
         <div id="video-info">
 
             <h2 id="video-title"></h2>
 
-        </div>
-    
+        </div>   
   
     <div id="queue">
       <form>
@@ -56,5 +60,15 @@
         </tr>
       </table>
     </div>
+    
+    <div id=“chat” style="float:right;">
+        <ul id="chatlog">
+            <br />
+        </ul>
+        <ul id="new-comment">
+            <li><textarea id="submitted-comment" style="background-color:#faf2f0;width:336px;"></textarea>
+            <button style="background-color:#faf2f0;border-width:1px;" id="sendButton" method="GET" action="chatmessages"><img src="images/sendicon.png" style="width:40px;height:40px;padding:0px;"></button></li>
+        </ul>
+      </div>
   </body>
 </html>

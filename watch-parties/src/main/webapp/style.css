@@ -1,3 +1,14 @@
+#player{
+    padding: 50px;
+    float: left;
+}
+
+#video-info{
+    color: Black;
+    padding-left: 50px;
+    float: left;
+}
+
 body{
   font-family: Roboto, Arial, sans-serif;
 }
