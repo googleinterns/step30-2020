@@ -9,3 +9,51 @@
     float: left;
 }
 
+body{
+  font-family: Roboto, Arial, sans-serif;
+}
+form{
+  display:flex;
+}
+.timePosted{
+  margin-left:108px;
+  margin-top:-26px;
+}
+.views::after {
+  content: "•";
+  margin: 0 4px;
+}
+#queue{
+  width:40%;
+  text-align:left;
+  font-size:12px;
+}
+#videoLink{
+  width:90%;
+  height:19px;
+}
+.thumbnail{
+  width:240px;
+  height:135px;
+}
+.channelImage{
+  width:28px;
+  height:28px;
+}
+td{
+  width:240px;
+  height:200px;
+}
+.title{
+  margin-top:-30px;
+  font-weight:bold;
+  margin-left:36px;
+}
+.channelName{
+  margin-top:-28px;
+  margin-left:36px;
+}
+.views{
+  margin-top:-28px;
+  margin-left:36px;
+}
