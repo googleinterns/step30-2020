@@ -9,6 +9,9 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // Create the player object
 var player;
 
+// Create variable to keep track of host
+var host = false;
+
 // Create constant variables for timeout functions
 const longPollingTimeOutMS = 60000; 
 const timeOutMS = 1000;
@@ -29,22 +32,30 @@ function onYouTubeIframeAPIReady() {
         });
 }
 
+// Function to set the host 
+function setHost(){
+    host = true;
+}
+
 // When the player state is changed, the API calls this function
 function onPlayerStateChange(event) {
+    console.log(host);
     var status = player.getPlayerState();
 
-    $.ajax({
-        url: 'sync',
-        method: 'POST',
-        data: {status : status},
-        success    : function(resultText){
-            $('#result').html(resultText);
-            setTimeout(() => { console.log("Changed playback state"); }, timeOutMS);
-        },
-        error : function(jqXHR, exception){
-            console.log('Error occured');
-        }
-    });
+    if(host == true){
+        $.ajax({
+            url: 'sync',
+            method: 'POST',
+            data: {status : status},
+            success    : function(resultText){
+                $('#result').html(resultText);
+                setTimeout(() => { console.log("Changed playback state"); }, timeOutMS);
+            },
+            error : function(jqXHR, exception){
+                console.log('Error occured');
+            }
+        });
+    }
 }
 
 // Functions that change the playback state of the player
@@ -85,7 +96,9 @@ function longPolling() {
      $.ajax({ 
         url: "sync",
         success: function(updater){
-            updatePlayer(updater.status);
+            if(host == false){
+                updatePlayer(updater.status);
+            }
         },
         error: function(err) {
             console.log("Error");
