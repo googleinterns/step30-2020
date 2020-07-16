@@ -1,7 +1,21 @@
 //Timer under construction
-//document.getElementById("chatlog").onload = function() {setInterval(window.alert("hi"), 5000)}; 
-document.getElementById("sendButton").onclick = function() {addNewComment()}; 
+//document.getElementById("chatlog").onload = function() {setInterval(loadComments(), 5000)}; 
+//document.getElementById("sendButton").onclick = function() {addNewComment()}; 
 var formattedComment = "";
+var timer = window.setInterval(loadComments(), 5000);
+
+function loadComments() {
+  window.alert("hello");
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("chatlog").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "/chatstorage", true);
+  xhttp.send();
+}
 
 function addNewComment() {
     var comment = document.getElementById("submitted-comment").value;

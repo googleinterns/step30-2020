@@ -16,6 +16,7 @@
     border-style: solid;
     border-width: 1px;
     position: right;
+    overflow: scroll;
 }
 
 #chatlog > li {

@@ -8,6 +8,7 @@ public final class Chat {
   private String message;
   private long authorID;
   private long timestamp;
+  private boolean writtenAlready = false;
  
   public Chat(String message, long authorID, long timestamp) {
     this.message = message;
@@ -21,6 +22,10 @@ public final class Chat {
     String t = "timestamp: ";
     return "{" + m + message + ", " + aid + authorID + ", " + t + timestamp + "}";
   }
+
+  public String toHTML() {
+    return "<br /><li><b>" + authorID + ": </b>" + message + "</li><br/>";
+  }
  
   public void setMessage(String message) {
     this.message = message;
@@ -33,6 +38,10 @@ public final class Chat {
   public void setTimestamp(long timestamp) {
     this.timestamp = timestamp;
   }
+
+  public void setWritten(boolean writtenAlready) {
+    this.writtenAlready = writtenAlready;
+  }
  
   public String getMessage() {
     return message;
@@ -44,5 +53,9 @@ public final class Chat {
  
   public long getTimestamp() {
     return timestamp;
+  }
+
+  public boolean getWritten() {
+    return writtenAlready;
   }
 }
