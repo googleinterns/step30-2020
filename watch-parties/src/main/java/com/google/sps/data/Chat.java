@@ -6,11 +6,12 @@ import java.util.Date;
 public final class Chat {
  
   private String message;
-  private long authorID;
+  private String authorID;
   private long timestamp;
   private boolean writtenAlready = false;
+  private boolean adminStatus = false;
  
-  public Chat(String message, long authorID, long timestamp) {
+  public Chat(String message, String authorID, long timestamp) {
     this.message = message;
     this.authorID = authorID;
     this.timestamp = timestamp;
@@ -24,14 +25,18 @@ public final class Chat {
   }
 
   public String toHTML() {
-    return "<br /><li><b>" + authorID + ": </b>" + message + "</li><br/>";
+    if (adminStatus) {
+        return "<br /><li><b id=\"admin\">" + authorID + ": </b>" + message + "</li><br/>";
+    } else {
+        return "<br /><li><b>" + authorID + ": </b>" + message + "</li><br/>";
+    }
   }
  
   public void setMessage(String message) {
     this.message = message;
   }
  
-  public void setAuthorId(long authorID) {
+  public void setAuthorId(String authorID) {
     this.authorID = authorID;
   }
  
@@ -42,12 +47,16 @@ public final class Chat {
   public void setWritten(boolean writtenAlready) {
     this.writtenAlready = writtenAlready;
   }
+
+  public void setAdminStatus(boolean adminStatus) {
+    this.adminStatus = adminStatus;
+  }
  
   public String getMessage() {
     return message;
   }
  
-  public long getAuthorId() {
+  public String getAuthorId() {
     return authorID;
   }
  
@@ -57,5 +66,9 @@ public final class Chat {
 
   public boolean getWritten() {
     return writtenAlready;
+  }
+
+  public boolean getAdminStatus() {
+    return adminStatus;
   }
 }

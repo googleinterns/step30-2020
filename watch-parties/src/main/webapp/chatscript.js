@@ -2,10 +2,9 @@
 //document.getElementById("chatlog").onload = function() {setInterval(loadComments(), 5000)}; 
 //document.getElementById("sendButton").onclick = function() {addNewComment()}; 
 var formattedComment = "";
-var timer = window.setInterval(loadComments(), 5000);
+var timer = window.setInterval(loadComments, 1000);
 
 function loadComments() {
-  window.alert("hello");
   var xhttp;
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {

@@ -26,7 +26,7 @@ public class ChatReceiverServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String comment = request.getParameter("submitted-comment");
         long timestamp = System.currentTimeMillis();
-        long authorID = 3;
+        String authorID = "Tommy";
         //System.out.println(comment + "tralalalalalalalalalala");
         //System.out.println("checkpoint 1");
  

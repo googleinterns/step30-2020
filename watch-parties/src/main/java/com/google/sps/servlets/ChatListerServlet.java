@@ -44,7 +44,7 @@ public class ChatListerServlet extends HttpServlet {
         //c.setProperty("message", request.getParameter("submitted-comment"));
 
         String message = (String) entity.getProperty("message");
-        long authorID = (long) entity.getProperty("authorID");
+        String authorID = (String) entity.getProperty("authorID");
         long timestamp = (long) entity.getProperty("timestamp");
         //System.out.println("checkpoint 5");
 
@@ -89,21 +89,5 @@ public class ChatListerServlet extends HttpServlet {
         }
     }
     //System.out.println("checkpoint 7");
-  }
-
-  private int getNumComments(HttpServletRequest request) {
-    // Get the input from the form.
-    String ncString = request.getParameter("num-comments");
-
-    // Convert the input to an int.
-    int playerChoice;
-    try {
-      playerChoice = Integer.parseInt(ncString);
-    } catch (NumberFormatException e) {
-      System.err.println("Could not convert to int: " + ncString);
-      return -1;
-    }
-
-    return playerChoice;
   }
 }
