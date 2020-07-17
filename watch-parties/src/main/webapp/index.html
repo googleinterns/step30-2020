@@ -12,6 +12,21 @@
     <script type="module" src="chatscript.js"></script>
   </head>
   <body onload="loadVideoInfo()">
+      <div id="chat">
+        <ul id="chatlog">
+            <br />
+        </ul>
+        <ul id="new-comment">
+                <li><textarea id="submitted-comment"></textarea>
+                <button id="sendButton"><img src="images/sendicon.png"></button></li>
+        </ul>
+      </div>
+  </body>
+</html>
+
+        </ul>
+      </div>
+
       <div id="player"></div>
 
         <div id="video-info">
@@ -60,21 +75,5 @@
         </tr>
       </table>
     </div>
-
-    <div id=“chat” style="float:right;">
-        <ul id="chatlog">
-            <br />
-        </ul>
-        <ul id="new-comment">
-            <li>
-                <form method="POST" action="/chatstorer">
-                <textarea name="submitted-comment" style="background-color:#faf2f0;width:336px;"></textarea>
-                <!--<button style="background-color:#faf2f0;border-width:1px;" id="sendButton" ><img src="images/sendicon.png" style="width:40px;height:40px;padding:0px;"></button>-->
-                <!-- <input type="button" style="background-color:#faf2f0;border-width:1px;" id="sendButton" /> -->
-                <input type="submit" id="sendButton"/>
-                </form>
-            </li>
-        </ul>
-      </div>
   </body>
 </html>

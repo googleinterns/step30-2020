@@ -1,15 +1,9 @@
 #chat {
-    width: 200px;
     float: right;
-    align-content: left;
-    align-self: right;
-    height: 100vh;
-    background-color: red;
-    position: right;
 }
 
 #chatlog {
-    width: 400px;
+    width: 401px;
     height: 90vh;
     background-color: #faf2f0;
     padding: 0px;
@@ -28,12 +22,32 @@
 #new-comment {
     height: 90px;
     width: 400px;
-    /*float: right; */
     padding: 0px;
     position: right;
 }
 
+li > textarea {
+    background-color:#faf2f0;
+    width:336px;
+}
+
+li > button {
+    background-color:#faf2f0;
+    border-width:1px;
+    width:53px;
+    height:50px;
+}
+
+button > img {
+    width:40px;
+    height:40px;
+    padding:0px;
+}
+
 #new-comment > li {
     vertical-align: middle;
+    background-color:#faf2f0;
+    width:336px;
     list-style-type: none;
+    display: inline;
 }

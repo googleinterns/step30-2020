@@ -1,14 +1,12 @@
 package com.google.sps.data;
 import java.util.Date;
-//import java.sql.Timestamp;
- 
-/** An item on a todo list. */
+
 public final class Chat {
  
   private String message;
   private String authorID;
   private long timestamp;
-  private boolean writtenAlready = false;
+  private boolean writtenAlready = false; // makes sure comments arent written multiple times
   private boolean adminStatus = false;
  
   public Chat(String message, String authorID, long timestamp) {
