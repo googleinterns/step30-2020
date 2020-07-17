@@ -29,6 +29,7 @@ public class VideoSyncServlet extends HttpServlet {
     // https://developers.google.com/youtube/iframe_api_reference#Events
 
     int videoStatus = 0;
+    int videoTime = 0;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { 
@@ -38,7 +39,10 @@ public class VideoSyncServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String statusString = request.getParameter("status");
-        videoStatus = Integer.parseInt(statusString);
+        boolean hostStatus = Boolean.parseBoolean(request.getParameter("host"));
+        if(hostStatus){
+            videoStatus = Integer.parseInt(request.getParameter("status"));
+            videoTime = Integer.parseInt(request.getParameter("time"));
+        }
     }
 }

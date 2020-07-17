@@ -46,7 +46,7 @@ function onPlayerStateChange(event) {
         $.ajax({
             url: 'sync',
             method: 'POST',
-            data: {status : status},
+            data: {status : status, host: host, time: player.getCurrentTime()},
             success    : function(resultText){
                 $('#result').html(resultText);
                 setTimeout(() => { console.log("Changed playback state"); }, timeOutMS);
