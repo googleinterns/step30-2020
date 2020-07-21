@@ -33,6 +33,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 // Function to set the host 
+// TODO: Remove once room creation is complete 
 function setHost(){
     host = true;
 }
@@ -47,7 +48,7 @@ function onPlayerStateChange(event) {
             url: 'sync',
             method: 'POST',
             data: {status : status, host: host, time: player.getCurrentTime()},
-            success    : function(resultText){
+            success: function(resultText){
                 $('#result').html(resultText);
                 setTimeout(() => { console.log("Changed playback state"); }, timeOutMS);
             },
@@ -96,7 +97,7 @@ function longPolling() {
      $.ajax({ 
         url: "sync",
         success: function(updater){
-            if(host == false){
+            if(!host){
                 updatePlayer(updater.status);
             }
         },
