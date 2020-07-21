@@ -6,6 +6,27 @@ tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+//Changes text of room title element
+function getRoomData(){
+    const responsePromise = 
+    fetch('/room-data')   
+    .then(response => response.json())
+    .then((rooms) => {
+    const commentsListElement = document.getElementById('room-title');
+    commentsListElement.innerHTML = rooms[rooms.length-1].title;
+    });
+}
+//Submits video id to AddVideoServlet
+function queueVideo(){
+    $.ajax({
+        url:'/add-video',
+        type:'post',
+        data:{data:$('#urlInput').serialize()},
+        success:function(){
+            //console.log("queued")
+        }
+    });
+}
 // Create the player object
 var player;
 
@@ -28,11 +49,20 @@ function onPlayerReady(event) {
 }
 
 // When the player state is changed, the API calls this function
-
+var count = 0;//position in queue
 function onPlayerStateChange(event) {
     console.log(player.getPlayerState());
+    if(player.getPlayerState() == YT.PlayerState.ENDED){
+        const responsePromise = 
+        fetch('video-data')
+        .then(response => response.json())
+        .then((videos) => {
+            player.cueVideoById(videos[count], 0);
+            player.playVideo();
+            });
+        count+=1;
+    }
 }
-
 // Functions that change the playback state of the player
 function stopVideo() {
     player.stopVideo();
@@ -44,7 +74,7 @@ function pauseVideo() {
 
 // Function to load the title of the current video
 function loadVideoInfo() {
-
+    getRoomData();
     var titleElement = document.getElementById('video-title');
     titleElement.innerText = "Title";
 }
