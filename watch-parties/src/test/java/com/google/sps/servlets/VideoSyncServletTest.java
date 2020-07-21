@@ -35,14 +35,12 @@ public final class VideoSyncServletTest {
 
     @Before
     public void setUp() {
+        // Create a mock request with host privileges
         hostMockRequest = mock(HttpServletRequest.class);      
         when(hostMockRequest.getParameter("host")).thenReturn("true"); 
 
         userMockRequest = mock(HttpServletRequest.class);       
-
         mockResponse = mock(HttpServletResponse.class);   
-
-
     }
 
     @Test
@@ -66,6 +64,7 @@ public final class VideoSyncServletTest {
 
         VideoSyncServlet servlet = new VideoSyncServlet();
         servlet.doPost(hostMockRequest, mockResponse);
+        
         Assert.assertEquals(100, servlet.videoStatus); 
         Assert.assertEquals(10, servlet.videoTime); 
     }
@@ -77,6 +76,7 @@ public final class VideoSyncServletTest {
 
         VideoSyncServlet servlet = new VideoSyncServlet();
         servlet.doPost(userMockRequest, mockResponse);
+
         Assert.assertEquals(0, servlet.videoStatus); 
         Assert.assertEquals(0, servlet.videoTime); 
     }

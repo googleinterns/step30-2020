@@ -43,7 +43,7 @@ function onPlayerStateChange(event) {
     console.log(host);
     var status = player.getPlayerState();
 
-    if(host == true){
+    if(host){
         $.ajax({
             url: 'sync',
             method: 'POST',
