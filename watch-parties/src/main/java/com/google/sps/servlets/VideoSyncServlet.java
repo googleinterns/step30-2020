@@ -40,7 +40,7 @@ public class VideoSyncServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         boolean hostStatus = Boolean.parseBoolean(request.getParameter("host"));
-        if(hostStatus){
+        if (hostStatus) {
             videoStatus = Integer.parseInt(request.getParameter("status"));
             videoTime = Integer.parseInt(request.getParameter("time"));
         }

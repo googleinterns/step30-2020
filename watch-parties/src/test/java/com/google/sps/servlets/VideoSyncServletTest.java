@@ -29,54 +29,55 @@ import static org.mockito.Mockito.*;
 /** Class to test VideoSyncServlet. */
 @RunWith(JUnit4.class)
 public final class VideoSyncServletTest {
-    private HttpServletRequest HostMockRequest;       
-    private HttpServletResponse HostMockResponse; 
-    private HttpServletRequest UserMockRequest;       
-    private HttpServletResponse UserMockResponse; 
+    private HttpServletRequest hostMockRequest;       
+    private HttpServletRequest userMockRequest;       
+    private HttpServletResponse mockResponse; 
 
     @Before
     public void setUp() {
-        // Create mock and request with host privileges
-        HostMockRequest = mock(HttpServletRequest.class);      
-        when(HostMockRequest.getParameter("host")).thenReturn("true"); 
-        HostMockResponse = mock(HttpServletResponse.class);   
+        hostMockRequest = mock(HttpServletRequest.class);      
+        when(hostMockRequest.getParameter("host")).thenReturn("true"); 
 
-        // Create mock and request with regular privileges
-        UserMockRequest = mock(HttpServletRequest.class);       
-        UserMockResponse = mock(HttpServletResponse.class);   
+        userMockRequest = mock(HttpServletRequest.class);       
+
+        mockResponse = mock(HttpServletResponse.class);   
+
+
     }
 
     @Test
     public void testDoGet() throws IOException {
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer = new PrintWriter(stringWriter);
-        when(UserMockResponse.getWriter()).thenReturn(writer);
+        when(mockResponse.getWriter()).thenReturn(writer);
 
         VideoSyncServlet servlet = new VideoSyncServlet();
         servlet.videoStatus = 200;
-        servlet.doGet(UserMockRequest, UserMockResponse);
+        servlet.doGet(userMockRequest, mockResponse);
 
         writer.flush();
         Assert.assertTrue(stringWriter.toString().contains("200"));
     }
 
     @Test
-    public void testDoPostHostTrue() throws IOException {
-        when(HostMockRequest.getParameter("status")).thenReturn("100");
-        when(HostMockRequest.getParameter("time")).thenReturn("0");
+    public void testDoPostOnHostUser() throws IOException {
+        when(hostMockRequest.getParameter("status")).thenReturn("100");
+        when(hostMockRequest.getParameter("time")).thenReturn("10");
 
         VideoSyncServlet servlet = new VideoSyncServlet();
-        servlet.doPost(HostMockRequest, HostMockResponse);
+        servlet.doPost(hostMockRequest, mockResponse);
         Assert.assertEquals(100, servlet.videoStatus); 
+        Assert.assertEquals(10, servlet.videoTime); 
     }
 
     @Test
-    public void testDoPostHostFalse() throws IOException {
-        when(UserMockRequest.getParameter("status")).thenReturn("100");
-        when(UserMockRequest.getParameter("time")).thenReturn("0");
+    public void testDoPostOnGeneralUser() throws IOException {
+        when(userMockRequest.getParameter("status")).thenReturn("100");
+        when(userMockRequest.getParameter("time")).thenReturn("10");
 
         VideoSyncServlet servlet = new VideoSyncServlet();
-        servlet.doPost(UserMockRequest, UserMockResponse);
+        servlet.doPost(userMockRequest, mockResponse);
         Assert.assertEquals(0, servlet.videoStatus); 
+        Assert.assertEquals(0, servlet.videoTime); 
     }
 }
