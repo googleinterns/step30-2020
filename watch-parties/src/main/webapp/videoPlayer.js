@@ -1,3 +1,17 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 // Loads in the iFrame Player API code asynchronously
 var tag = document.createElement('script');
 
@@ -8,6 +22,9 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // Create the player object
 var player;
+
+// Create variable to keep track of host
+var host = false;
 
 // Create constant variables for timeout functions
 const longPollingTimeOutMS = 60000; 
@@ -29,22 +46,31 @@ function onYouTubeIframeAPIReady() {
         });
 }
 
+// Function to set the host 
+// TODO: Remove once room creation is complete 
+function setHost(){
+    host = true;
+}
+
 // When the player state is changed, the API calls this function
 function onPlayerStateChange(event) {
+    console.log(host);
     var status = player.getPlayerState();
 
-    $.ajax({
-        url: 'sync',
-        method: 'POST',
-        data: {status : status},
-        success    : function(resultText){
-            $('#result').html(resultText);
-            setTimeout(() => { console.log("Changed playback state"); }, timeOutMS);
-        },
-        error : function(jqXHR, exception){
-            console.log('Error occured');
-        }
-    });
+    if(host){
+        $.ajax({
+            url: 'sync',
+            method: 'POST',
+            data: {status : status, host: host, time: player.getCurrentTime()},
+            success: function(resultText){
+                $('#result').html(resultText);
+                setTimeout(() => { console.log("Changed playback state"); }, timeOutMS);
+            },
+            error : function(jqXHR, exception){
+                console.log('Error occured');
+            }
+        });
+    }
 }
 
 // Functions that change the playback state of the player
@@ -85,7 +111,9 @@ function longPolling() {
      $.ajax({ 
         url: "sync",
         success: function(updater){
-            updatePlayer(updater.status);
+            if(!host){
+                updatePlayer(updater.status);
+            }
         },
         error: function(err) {
             console.log("Error");
