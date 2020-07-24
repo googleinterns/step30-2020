@@ -77,7 +77,32 @@ public final class VideoSyncServletTest {
         VideoSyncServlet servlet = new VideoSyncServlet();
         servlet.doPost(userMockRequest, mockResponse);
 
-        Assert.assertEquals(0, servlet.videoStatus); 
+        Assert.assertEquals(2, servlet.videoStatus); 
         Assert.assertEquals(0, servlet.videoTime); 
+    }
+
+    @Test 
+    public void testVideoTimeStamp() throws IOException {
+        VideoSyncServlet servlet = new VideoSyncServlet();
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter);
+        
+        // Check that get requests are in sync with the time stamp that is done with post
+        for(int testTime = 0; testTime < 10; testTime++) {
+            if(testTime == 2) {
+                testTime = 5;
+            }
+
+            String testTimeStr = Integer.toString(testTime);
+            when(hostMockRequest.getParameter("status")).thenReturn("1");
+            when(hostMockRequest.getParameter("time")).thenReturn(testTimeStr);
+            servlet.doPost(hostMockRequest, mockResponse);
+
+            when(mockResponse.getWriter()).thenReturn(writer);
+            servlet.doGet(userMockRequest, mockResponse);
+            writer.flush();
+
+            Assert.assertTrue(stringWriter.toString().contains(testTimeStr));
+        }
     }
 }
