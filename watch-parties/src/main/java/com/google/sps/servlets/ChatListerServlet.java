@@ -27,7 +27,6 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
-//import atg.repository.QueryOptions;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import java.util.Date;
 import com.google.sps.data.Chat;
@@ -45,37 +44,37 @@ public class ChatListerServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Bring comments back from datastore
-    Query query = new Query("Chat").addSort("timestamp", SortDirection.DESCENDING); 
+    Query query = new Query("Chat").addSort("timestamp", SortDirection.ASCENDING); 
     PreparedQuery results = datastore.prepare(query);
 
-    // convert to actual chat object, add to list of comments
+    // count how many comments there are
+    int count = 0;
+    for (Entity entity : results.asIterable()) {
+        count++;
+    }
+    int startIndex = calculateStartIndex(count);
+
+    // convert to actual chat object, send the 50 recent comments to the fron end
+    int i = 0;
+    response.setContentType("text/html;");
     for (Entity entity : results.asIterable()) {
         String message = (String) entity.getProperty("message");
         String authorID = (String) entity.getProperty("authorID");
         long timestamp = (long) entity.getProperty("timestamp");
 
-        //comments.add(new Chat(message, authorID, timestamp));
-        stackAdd(new Chat(message, authorID, timestamp));
-    }
-
-    // preparing to write comments into file
-    response.setContentType("text/html;");
-
-    // writing comments into file while iterating through stack
-    for (int i = stackComments.size()-1; i >= 0; i--) {
-        if (!stackComments.peek().getWritten()) {
-            response.getWriter().println(stackComments.peek().toHTML());
-            stackComments.peek().setWritten(true);
-            stackComments.pop();
+        Chat chatMessage = new Chat(message, authorID, timestamp);
+        if (i >= startIndex) {
+            response.getWriter().println(chatMessage.toHTML());
         }
+        i++;
     }
   }
 
-  // ensures stack only stays a certain size
-  public void stackAdd(Chat input) {
-      stackComments.push(input);
-      if (stackComments.size() > 50) {
-          stackComments.pop();
+  // if there are over fifty comments, calculate where to start so that only fifty load
+  public int calculateStartIndex(int input) {
+      if (input <= 50) {
+          return input;
       }
+      return input-50; 
   }
 }

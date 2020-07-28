@@ -1,12 +1,10 @@
-window.addEventListener("load", clearComments);
+//window.addEventListener("load", clearComments);
 document.getElementById("sendButton").addEventListener("click", addNewComment);
 var formattedComment = "";
 var timer = window.setInterval(loadComments, 1000); //check comment updates every second
 
 // retrieves comments from the backend, loads using AJAX
 function loadComments() {
-  const readyToReload = 4;
-  const OK = 200
   var xhttp;
   xhttp = new XMLHttpRequest();
   xhttp.addEventListener('load', function() {
@@ -17,15 +15,6 @@ function loadComments() {
   xhttp.open("GET", "/chatstorage", true);
   xhttp.send();
 } 
-
-function clearComments() {
-    //var adComs = document.getElementById("admin");
-    //var norComs = document.getElementById("normalComment");
-    //adComs.style.display = "none";
-    //norComs.style.display = "none";
-    
-    //window.alert("hi");
-}
 
 //stores comments into the backend using AJAX
 function addNewComment() {

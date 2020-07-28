@@ -38,9 +38,9 @@ public final class Chat {
 
   public String toHTML() {
     if (adminStatus) {
-        return "<br /><li><b id=\"admin\">" + authorID + ": </b>" + message + "</li><br/>";
+        return "<br /><li><b class=\"admin\">" + authorID + ": </b>" + message + "</li><br/>";
     } else {
-        return "<br /><li><b id=\"normalComment\">" + authorID + ": </b>" + message + "</li><br/>";
+        return "<br /><li><b>" + authorID + ": </b>" + message + "</li><br/>";
     }
   }
 
@@ -52,7 +52,7 @@ public final class Chat {
     this.adminStatus = adminStatus;
   }
 
-  public void setWritten(boolean roomID) {
+  public void setWritten(String roomID) {
     this.roomID = roomID;
   }
  
