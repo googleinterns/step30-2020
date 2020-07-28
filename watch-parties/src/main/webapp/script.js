@@ -27,6 +27,7 @@ function queueVideo(){
         }
     });
 }
+
 // Create the player object
 var player;
 
@@ -59,6 +60,8 @@ function onPlayerStateChange(event) {
         .then((videos) => {
             player.cueVideoById(videos[count], 0);
             player.playVideo();
+            authenticate(loadClient)
+            console.log(execute(videos[count]))
             });
         count+=1;
     }
