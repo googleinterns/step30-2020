@@ -21,6 +21,7 @@ public final class Chat {
   private final long timestamp; //used for ordering comments
   private boolean writtenAlready = false; // makes sure comments arent written multiple times
   private boolean adminStatus = false; // Was this written by an admin
+  private String roomID = "";
  
   public Chat(String message, String authorID, long timestamp) {
     this.message = message;
@@ -50,6 +51,10 @@ public final class Chat {
   public void setAdminStatus(boolean adminStatus) {
     this.adminStatus = adminStatus;
   }
+
+  public void setWritten(boolean roomID) {
+    this.roomID = roomID;
+  }
  
   public String getMessage() {
     return message;
@@ -69,5 +74,9 @@ public final class Chat {
 
   public boolean getAdminStatus() {
     return adminStatus;
+  }
+
+  public String getRoomId() {
+    return roomID;
   }
 }
