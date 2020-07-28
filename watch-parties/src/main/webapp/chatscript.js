@@ -6,11 +6,11 @@ var timer = window.setInterval(loadComments, 1000); //check comment updates ever
 function loadComments() {
   var xhttp;
   xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-    document.getElementById("chatlog").innerHTML = this.responseText;
+  xhttp.addEventListener('load', function() {
+    if (this.status == 200) {
+      document.getElementById("chatlog").innerHTML = this.responseText;
     }
-  };
+  });
   xhttp.open("GET", "/chatstorage", true);
   xhttp.send();
 } 
@@ -36,4 +36,3 @@ function addNewComment() {
     }
     document.getElementById("submitted-comment").value = "";
 }
-
