@@ -38,7 +38,6 @@ public final class VideoSyncServletTest {
         // Create a mock request with host privileges
         hostMockRequest = mock(HttpServletRequest.class);      
         when(hostMockRequest.getParameter("host")).thenReturn("true"); 
-
         userMockRequest = mock(HttpServletRequest.class);       
         mockResponse = mock(HttpServletResponse.class);   
     }
@@ -89,10 +88,6 @@ public final class VideoSyncServletTest {
         
         // Check that get requests are in sync with the time stamp that is done with post
         for(int testTime = 0; testTime < 10; testTime++) {
-            if(testTime == 2) {
-                testTime = 5;
-            }
-
             String testTimeStr = Integer.toString(testTime);
             when(hostMockRequest.getParameter("status")).thenReturn("1");
             when(hostMockRequest.getParameter("time")).thenReturn(testTimeStr);

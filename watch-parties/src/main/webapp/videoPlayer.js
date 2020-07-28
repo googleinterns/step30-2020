@@ -26,22 +26,24 @@ var player;
 // Create variable to keep track of host
 var host = false;
 
-// Create constant variables for timeout functions
+// Create constant variables 
 const ajaxPostRequestIntervalMS = 500;
+const maxTimeDifFromHost = 1;
 
+// Create the YouTube iFrame player
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: '390',
         width: '640',
         videoId: 'QSQwZlRMVAM',
         events: {
-        // Adds event listeners for the player and maps the function that will triggered
-        // See Events docs for player event listeners:
-        // https://developers.google.com/youtube/iframe_api_reference#Events
+            // Adds event listeners for the player and maps the function that will triggered
+            // See Events docs for player event listeners:
+            // https://developers.google.com/youtube/iframe_api_reference#Events
 
-        'onReady': onPlayerReady
+            'onReady': onPlayerReady
         }
-        });
+    });
 }
 
 // Function to set the host and start ajax post requests
@@ -50,6 +52,43 @@ function setHost(){
     host = true;
     // Sends host player status information
     setInterval(hostPlayerStatus, ajaxPostRequestIntervalMS);
+}
+
+// Function to initiate long polling to perform get requests 
+function longPolling() {
+     $.ajax({ 
+        url: "sync",
+        success: function(updater){
+            if(!host){
+                updatePlayer(updater.status);
+                checkDifference(updater.timeStamp);
+            }
+        },
+        error: function(err) {
+            console.error("Error in longPolling() occured!", err);
+        },
+        type: "GET", 
+        dataType: "json", 
+        complete: longPolling
+    });
+}
+
+// Function that sends the host's player status
+function hostPlayerStatus() { 
+    var status = player.getPlayerState();
+    var timeStamp = player.getCurrentTime();
+    
+    $.ajax({
+            url: 'sync',
+            method: 'POST',
+            data: {status : status, host: host, time: timeStamp},
+            success: function(resultText){
+                $('#result').html(resultText);
+            },
+            error : function(err, exception){
+                console.error('Error in hostPlayerStatus() occured!', err);
+            }
+        });
 }
 
 // Functions that change the playback state of the player
@@ -82,6 +121,13 @@ function updatePlayer(status){
     }
 }
 
+// Make sure the local player time  is within a second of the host's current time
+function checkDifference(hostTimeStamp){
+    if(Math.abs(player.getCurrentTime() - hostTimeStamp) > maxTimeDifFromHost){
+        player.seekTo(hostTimeStamp);
+    }
+}
+
 // Function to load the title of the current video
 // TODO: Link to Data API to import information from current video
 function loadVideoInfo() {
@@ -89,52 +135,8 @@ function loadVideoInfo() {
     titleElement.innerText = "Title";
 }
 
-function longPolling() {
-    // Long Polling
-     $.ajax({ 
-        url: "sync",
-        success: function(updater){
-            if(!host){
-                updatePlayer(updater.status);
-                checkDifference(updater.timeStamp);
-            }
-        },
-        error: function(err) {
-            console.log("Error in longPolling() occured!");
-        },
-        type: "GET", 
-        dataType: "json", 
-        complete: longPolling
-    });
-}
-
 // When the video player is ready, the API will call this function
 function onPlayerReady(event) {
     playVideo();    
     longPolling();
-}
-
-// Make sure the local player time  is within a second of the host's current time
-function checkDifference(hostTimeStamp){
-    if(Math.abs(player.getCurrentTime() - hostTimeStamp) > 1){
-        player.seekTo(hostTimeStamp);
-    }
-}
-
-// Function that sends the host's player status
-function hostPlayerStatus() { 
-    var status = player.getPlayerState();
-    var timeStamp = player.getCurrentTime();
-    
-    $.ajax({
-            url: 'sync',
-            method: 'POST',
-            data: {status : status, host: host, time: timeStamp},
-            success: function(resultText){
-                $('#result').html(resultText);
-            },
-            error : function(jqXHR, exception){
-                console.log('Error in hostPlayerStatus() occured!');
-            }
-        });
 }
