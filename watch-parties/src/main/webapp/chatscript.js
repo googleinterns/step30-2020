@@ -48,4 +48,3 @@ function addNewComment() {
     }
     document.getElementById("submitted-comment").value = "";
 }
-
