@@ -28,6 +28,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.FetchOptions;
 import java.util.Date;
 import com.google.sps.data.Chat;
 import java.util.LinkedList; 
@@ -44,37 +45,21 @@ public class ChatListerServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Bring comments back from datastore
-    Query query = new Query("Chat").addSort("timestamp", SortDirection.ASCENDING); 
+    Query query = new Query("Chat").addSort("timestamp", SortDirection.DESCENDING); 
     PreparedQuery results = datastore.prepare(query);
-
-    // count how many comments there are
-    int count = 0;
-    for (Entity entity : results.asIterable()) {
-        count++;
-    }
-    int startIndex = calculateStartIndex(count);
+    List<Entity> entities = results.asList(FetchOptions.Builder.withLimit(50));
 
     // convert to actual chat object, send the 50 recent comments to the fron end
-    int i = 0;
     response.setContentType("text/html;");
-    for (Entity entity : results.asIterable()) {
+    for (int i = entities.size()-1; i>= 0; i--) {
+        Entity entity = entities.get(i);
+
         String message = (String) entity.getProperty("message");
         String authorID = (String) entity.getProperty("authorID");
         long timestamp = (long) entity.getProperty("timestamp");
-
+        
         Chat chatMessage = new Chat(message, authorID, timestamp);
-        if (i >= startIndex) {
-            response.getWriter().println(chatMessage.toHTML());
-        }
-        i++;
+        response.getWriter().println(chatMessage.toHTML());
     }
-  }
-
-  // if there are over fifty comments, calculate where to start so that only fifty load
-  public int calculateStartIndex(int input) {
-      if (input <= 50) {
-          return input;
-      }
-      return input-50; 
   }
 }
