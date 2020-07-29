@@ -28,13 +28,14 @@ public class VideoSyncServlet extends HttpServlet {
     // See onStateChange docs for video state values:
     // https://developers.google.com/youtube/iframe_api_reference#Events
 
-    int videoStatus = 0;
+    // When the servlet starts, video status is at 2 and video time is at 0 to prevent a non host user from changing player state
+    int videoStatus = 2;
     int videoTime = 0;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException { 
         response.setContentType("application/json");
-        response.getWriter().println("{\"status\": \"" + videoStatus + "\"}");
+        response.getWriter().println("{\"status\": \"" + videoStatus + "\", \"timeStamp\": \"" + videoTime + "\"}");
     }
 
     @Override
@@ -42,7 +43,7 @@ public class VideoSyncServlet extends HttpServlet {
         boolean hostStatus = Boolean.parseBoolean(request.getParameter("host"));
         if (hostStatus) {
             videoStatus = Integer.parseInt(request.getParameter("status"));
-            videoTime = Integer.parseInt(request.getParameter("time"));
+            videoTime = Math.round(Float.parseFloat(request.getParameter("time")));
         }
     }
 }
