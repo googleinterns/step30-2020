@@ -85,7 +85,7 @@ function hostPlayerStatus() {
             success: function(resultText){
                 $('#result').html(resultText);
             },
-            error : function(err, exception){
+            error : function(err){
                 console.error('Error in hostPlayerStatus() occured!', err);
             }
         });
