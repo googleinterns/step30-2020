@@ -1,21 +1,38 @@
-//Timer under construction
-//document.getElementById("chatlog").onload = function() {setInterval(window.alert("hi"), 5000)}; 
-document.getElementById("sendButton").onclick = function() {addNewComment()}; 
+document.getElementById("sendButton").addEventListener("click", addNewComment);
 var formattedComment = "";
+var timer = window.setInterval(loadComments, 1000); //check comment updates every second
 
+// retrieves comments from the backend, loads using AJAX
+function loadComments() {
+  var xhttp;
+  xhttp = new XMLHttpRequest();
+  xhttp.addEventListener('load', function() {
+    if (this.status == 200) {
+      document.getElementById("chatlog").innerHTML = this.responseText;
+    }
+  });
+  xhttp.open("GET", "/chatstorage", true);
+  xhttp.send();
+} 
+
+//stores comments into the backend using AJAX
 function addNewComment() {
     var comment = document.getElementById("submitted-comment").value;
-    if (comment != "") {
-        formattedComment += "<br /><li>" + comment + "</li><br />";
-        localStorage.setItem("commentStorageKey", formattedComment); 
-        document.getElementById("chatlog").innerHTML = localStorage.getItem("commentStorageKey");
-        document.getElementById("submitted-comment").value = "";
-    }
-}
 
-// Just a servlet connector for now.
-function lmao() {
-    fetch('/chatmessages').then(response => response.json()).then((justSettingUp) => {
-        console.log(justSettingUp);
-    });
-} 
+    if (comment != "") {
+        $.ajax({
+            url: '/chatstorer',
+            method: 'POST',
+            data: {
+                "submitted-comment" : comment
+            },
+            success : function(resultText){
+                console.log("it worked");
+            },
+            error : function(jqXHR, exception){
+                console.log('Errror occured');
+            }
+        });
+    }
+    document.getElementById("submitted-comment").value = "";
+}
