@@ -34,6 +34,16 @@ public class ChatReceiverServlet extends HttpServlet {
         long timestamp = System.currentTimeMillis();
         String authorID = "User"; //placeholder for now
 
+        /*
+        Query query = new Query("Member");
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        PreparedQuery results = datastore.prepare(query);
+        for (Entity entity : results.asIterable()) {
+            if(entity.getProperty("user").equals(userService.getCurrentUser()))
+            authorID=entity.getProperty("nickname");
+        }   
+        */
+
         //From here on we make sure the message is stored properly
         Entity chatEntity = new Entity("Chat");
         chatEntity.setProperty("message", comment);

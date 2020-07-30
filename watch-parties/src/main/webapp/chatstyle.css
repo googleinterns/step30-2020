@@ -9,15 +9,24 @@
     padding: 0px;
     border-style: solid;
     border-width: 1px;
-    position: right;
-    overflow: scroll;
+    position: relative;
+    overflow: hidden;
+    display:block;
 }
 
-#chatlog > li {
+#actual-comments {
+    position: absolute;
+    bottom: 20px;
+    overflow: hidden;
+}
+
+#actual-comments > li {
     margin-left: 20px;
-    float: left;
+    margin-right: 20px;
+    margin-top: 12px;
     list-style-type: none;
     color: #faf2f0;
+    display:block;
 }
 
 #new-comment {

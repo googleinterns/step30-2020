@@ -8,7 +8,7 @@ function loadComments() {
   xhttp = new XMLHttpRequest();
   xhttp.addEventListener('load', function() {
     if (this.status == 200) {
-      document.getElementById("chatlog").innerHTML = this.responseText;
+      document.getElementById("actual-comments").innerHTML = this.responseText;
     }
   });
   xhttp.open("GET", "/chatstorage", true);
