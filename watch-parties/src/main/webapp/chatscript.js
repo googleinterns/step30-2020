@@ -1,5 +1,4 @@
 document.getElementById("sendButton").addEventListener("click", addNewComment);
-var formattedComment = "";
 var timer = window.setInterval(loadComments, 1000); //check comment updates every second
 
 // retrieves comments from the backend, loads using AJAX

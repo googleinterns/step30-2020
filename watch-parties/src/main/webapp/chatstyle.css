@@ -12,6 +12,7 @@
     position: relative;
     overflow: hidden;
     display:block;
+    margin-bottom: 0px;
 }
 
 #actual-comments {
@@ -30,22 +31,25 @@
 }
 
 #new-comment {
+    margin-top: 0px;
     height: 90px;
     width: 400px;
     padding: 0px;
     position: right;
+    margin-right: 0cpx;
 }
 
 li > textarea {
     background-color:#333333;
     width:336px;
     color: #faf2f0;
+    height:50px;
 }
 
 li > button {
     background-color:#333333;
     border-width:1px;
-    width:53px;
+    width:54px;
     height:50px;
 }
 
@@ -56,10 +60,11 @@ button > img {
 }
 
 #new-comment > li {
-    vertical-align: middle;
+    vertical-align: top;
     background-color:#faf2f0;
     width: 336px;
     list-style-type: none;
     color:#faf2f0;
     display: inline;
+    margin-left: 0px;
 }
