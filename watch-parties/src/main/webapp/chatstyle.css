@@ -61,10 +61,13 @@ button > img {
 
 #new-comment > li {
     vertical-align: top;
-    background-color:#faf2f0;
     width: 336px;
     list-style-type: none;
     color:#faf2f0;
     display: inline;
     margin-left: 0px;
+}
+
+#header {
+    padding-left: 50px;
 }
