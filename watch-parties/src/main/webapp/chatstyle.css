@@ -1,0 +1,56 @@
+#chat {
+    float: right;
+}
+
+#chatlog {
+    width: 401px;
+    height: 88vh;
+    background-color: #333333;
+    padding: 0px;
+    border-style: solid;
+    border-width: 1px;
+    position: right;
+    overflow: scroll;
+}
+
+#chatlog > li {
+    margin-left: 20px;
+    float: left;
+    list-style-type: none;
+    color: #faf2f0;
+}
+
+#new-comment {
+    height: 90px;
+    width: 400px;
+    padding: 0px;
+    position: right;
+}
+
+li > textarea {
+    background-color:#333333;
+    width:336px;
+    color: #faf2f0;
+}
+
+li > button {
+    background-color:#333333;
+    border-width:1px;
+    width:53px;
+    height:50px;
+}
+
+button > img {
+    width:40px;
+    height:40px;
+    padding:0px;
+}
+
+#new-comment > li {
+    vertical-align: middle;
+    background-color:#faf2f0;
+    width: 336px;
+    list-style-type: none;
+    color:#faf2f0;
+    display: inline;
+}
