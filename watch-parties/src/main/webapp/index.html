@@ -24,17 +24,56 @@
 
         </ul>
       </div>
-
+      <span id = "room-title"></span>
       <div id="player"></div>
 
-        <div id="video-info">
-
-            <h2 id="video-title"></h2>
-            
-            <!-- TODO: Remove once room creation is complete  -->
-            <button onclick="setHost()">Host</button>
-
+  <div id="queue-container">
+    <div id="form">
+    <input type="text" name = "videoId" id="urlInput" />
+    <button id="urlSubmit" onclick = "queueVideo()">Add</button>
+  </div>
+  <div id="queue">
+    <div class="video">
+      <div class="thumbnail"></div>
+      <div class="video-metadata">
+        <div src="avatar.jpg" class="avatar"></div>
+        <div class="author">
+          <span class="title">Video title goes here</span>
+          <span class="channel">Channel name</span>
+          <div class="secondary-metadata">
+            <span>100K views</span>
+            <span>4 months ago</span>
+          </div>
         </div>
+      </div>
+    </div>
+    <div class="video">
+      <div class="thumbnail"></div>
+      <div class="video-metadata">
+        <div src="avatar.jpg" class="avatar"></div>
+        <div class="author">
+          <span class="title">Video title goes here</span>
+          <span class="channel">Channel name</span>
+          <div class="secondary-metadata">
+            <span>100K views</span>
+            <span>4 months ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="video">
+      <div class="thumbnail"></div>
+      <div class="video-metadata">
+        <div src="avatar.jpg" class="avatar"></div>
+        <div class="author">
+          <span class="title">Video title goes here</span>
+          <span class="channel">Channel name</span>
+          <div class="secondary-metadata">
+            <span>100K views</span>
+            <span>4 months ago</span>
+          </div>
+        </div>
+      </div>
   
     <div id="queue">
       <form>
@@ -76,5 +115,7 @@
         </tr>
       </table>
     </div>
+  </div>
+</div>
   </body>
 </html>
