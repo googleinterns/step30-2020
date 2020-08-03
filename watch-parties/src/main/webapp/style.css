@@ -7,8 +7,27 @@
     font-size: 16pt;
     padding: 4px 0 4px 50px;
 }
+.channel{
+    font-size: 12pt;
+}
+.channel, .avatar{
+    margin-top: 4px;
+}
 #video-info{
     padding-left: 50px;
+}
+#firstThumbnail{
+    display: none;
+}
+#secondThumbnail{
+    display: none;
+}
+#thirdThumbnail{
+    display: none;
+}
+#firstThumbnail, #secondThumbnail, #thirdThumbnail{
+margin:0;
+width:100%;
 }
 body{
   font-family: Roboto, Arial, sans-serif;
@@ -27,7 +46,9 @@ body{
 #urlSubmit {
   flex: none;
 }
-
+.channelData{
+    display: inline-block;
+}
 #queue {
   padding: 0;
   display: flex;
@@ -38,23 +59,24 @@ body{
 }
 .thumbnail {
   width: 210px;
-  height: 121px;
-  background: linear-gradient(45deg, #6d9eebff, white);
-  margin: 0 0 8px 0;
+  height: 118px;
+  margin: 0;
+  overflow:hidden;
 }
 #queue-container {
   width: 640px;
-  padding: 50px;
+  padding: 0 50px 50px 50px;
 }
 .avatar {
-  width: 28px;
-  height: 28px;
-  background: linear-gradient(90deg, #6d9eebff, white);
-  border-radius: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  display: none;
 }
 .video-metadata {
   display: flex;
   flex-direction: row;
+  margin-top: 4px;
 }
 .title {
   font-weight: bold;

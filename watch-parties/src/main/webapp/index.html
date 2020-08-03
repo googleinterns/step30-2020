@@ -8,17 +8,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="videoPlayer.js"></script>
     <link rel="stylesheet" href="videoPlayer.css">
-    <script type="module" src="script.js"></script>
     <script type="module" src="chatscript.js"></script>
   </head>
   <body onload="loadVideoInfo()">
+      
         <span id = "room-title"></span>
         <br/>
         <div id="player"></div>
         <div id="video-info">
-            <h2 id="video-title"></h2>
+            <!--<h2 id="video-title"></h2>-->
  <!-- TODO: Remove once room creation is complete  -->
-            <button onclick="setHost()">Host</button>
+            <!--<button onclick="setHost()">Host</button>-->
 
         </div>   
     
@@ -30,45 +30,45 @@
   </div>
   <div id="queue">
     <div class="video">
-      <div class="thumbnail"></div>
+      <div class = "thumbnail">
+      <img id="firstThumbnail"></img>
+      </div>
       <div class="video-metadata">
-        <div src="avatar.jpg" class="avatar"></div>
+        <img id = "firstAvatar" class="avatar"></img>
         <div class="author">
-          <span class="title">Video title goes here</span>
-          <span class="channel">Channel name</span>
-          <div class="secondary-metadata">
-            <span>100K views</span>
-            <span>4 months ago</span>
+          <span id = "firstTitle" class="title"></span>
+          <div class = "channelData"> 
+          <span id = "firstChannel" class="channel"></span>
           </div>
-        </div>
+          </div>
       </div>
     </div>
     <div class="video">
-      <div class="thumbnail"></div>
+      <div class = "thumbnail">
+      <img id="secondThumbnail"></img>
+      </div>
       <div class="video-metadata">
-        <div src="avatar.jpg" class="avatar"></div>
+        <img id = "secondAvatar" class="avatar"></img>
         <div class="author">
-          <span class="title">Video title goes here</span>
-          <span class="channel">Channel name</span>
-          <div class="secondary-metadata">
-            <span>100K views</span>
-            <span>4 months ago</span>
+          <span id = "secondTitle" class="title"></span>
+          <div class = "channelData"> 
+          <span id = "secondChannel" class="channel"></span>
           </div>
-        </div>
+          </div>
       </div>
     </div>
     <div class="video">
-      <div class="thumbnail"></div>
+      <div class = "thumbnail">
+      <img id="thirdThumbnail"></img>
+      </div>
       <div class="video-metadata">
-        <div src="avatar.jpg" class="avatar"></div>
+        <img id = "thirdAvatar" class="avatar"></img>
         <div class="author">
-          <span class="title">Video title goes here</span>
-          <span class="channel">Channel name</span>
-          <div class="secondary-metadata">
-            <span>100K views</span>
-            <span>4 months ago</span>
+          <span id = "thirdTitle" class="title"></span>
+          <div class = "channelData"> 
+          <span id = "thirdChannel" class="channel"></span>
           </div>
-        </div>
+          </div>
       </div>
     </div>
   </div>
