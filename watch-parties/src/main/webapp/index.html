@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
- <head>
+  <head>
     <meta charset="UTF-8">
     <title>Watch Parties</title>
     <link rel="stylesheet" href="style.css">
@@ -14,16 +14,12 @@
       
         <span id = "room-title"></span>
         <br/>
-        <div id="player"></div>
-        <div id="video-info">
-            <!--<h2 id="video-title"></h2>-->
- <!-- TODO: Remove once room creation is complete  -->
-            <!--<button onclick="setHost()">Host</button>-->
 
-        </div>   
-    
-        </div>
-  <div id="queue-container">
+      <span id = "room-title"></span>
+      <div id="player"></div>
+      <div id="video-info"></div>
+
+       <div id="queue-container">
     <div id="form">
     <input type="text" name = "videoId" id="urlInput" />
     <button id="urlSubmit" onclick = "queueVideo()">Add</button>
@@ -83,5 +79,6 @@
             <button style="background-color:#faf2f0;border-width:1px;" id="sendButton" method="GET" action="chatmessages"><img src="images/sendicon.png" style="width:40px;height:40px;padding:0px;"></button></li>
         </ul>
       </div>
+         
   </body>
 </html>
