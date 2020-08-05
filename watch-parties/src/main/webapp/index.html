@@ -11,13 +11,20 @@
     <script type="module" src="chatscript.js"></script>
   </head>
   <body onload="loadVideoInfo()">
-      
-        <span id = "room-title"></span>
-        <br/>
+      <div id="chat">
+        <ul id="chatlog">
+            <br />
+        </ul>
+        <ul id="new-comment">
+                <li><textarea id="submitted-comment"></textarea>
+                <button id="sendButton"><img src="images/sendiconv4.png"></button></li>
+        </ul>
+      </div>
 
+        </ul>
+      </div>
       <span id = "room-title"></span>
       <div id="player"></div>
-      <div id="video-info"></div>
 
        <div id="queue-container">
     <div id="form">
@@ -69,16 +76,7 @@
     </div>
   </div>
 </div>   
-           
-    <div id=“chat” style="float:right;">
-        <ul id="chatlog">
-            <br />
-        </ul>
-        <ul id="new-comment">
-            <li><textarea id="submitted-comment" style="background-color:#faf2f0;width:336px;"></textarea>
-            <button style="background-color:#faf2f0;border-width:1px;" id="sendButton" method="GET" action="chatmessages"><img src="images/sendicon.png" style="width:40px;height:40px;padding:0px;"></button></li>
-        </ul>
-      </div>
-         
+</div>  
+</div>
   </body>
 </html>

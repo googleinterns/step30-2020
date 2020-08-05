@@ -40,7 +40,6 @@ function onYouTubeIframeAPIReady() {
             // Adds event listeners for the player and maps the function that will triggered
             // See Events docs for player event listeners:
             // https://developers.google.com/youtube/iframe_api_reference#Events
-
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
         }
@@ -54,7 +53,7 @@ function setHost(){
     // Sends host player status information
     setInterval(hostPlayerStatus, ajaxPostRequestIntervalMS);
 }
-var yt_api_key = "AIzaSyAXwXRA01PHNqPU4i0wy1Gqm3lcDsfvYnY";
+var yt_api_key = "[ADD KEY]";
 //Adds video id to YT Data API link
 function getURL(yt_video_id){
     yt_snippet_endpoint = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + yt_video_id + "&key=" + yt_api_key;
