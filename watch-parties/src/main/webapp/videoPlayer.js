@@ -32,7 +32,7 @@ const maxTimeDifFromHost = 1;
 
 // Create the YouTube iFrame player
 function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
+    player = new YT.Player('iframe-player', {
         height: '390',
         width: '640',
         videoId: 'QSQwZlRMVAM',
@@ -53,7 +53,27 @@ function setHost(){
     // Sends host player status information
     setInterval(hostPlayerStatus, ajaxPostRequestIntervalMS);
 }
+
+// Function that sends the host's player status
+function hostPlayerStatus() { 
+    var status = player.getPlayerState();
+    var timeStamp = player.getCurrentTime();
+    
+    $.ajax({
+            url: 'sync',
+            method: 'POST',
+            data: {status : status, host: host, time: timeStamp},
+            success: function(resultText){
+                $('#result').html(resultText);
+            },
+            error : function(err){
+                console.error('Error in hostPlayerStatus() occured!', err);
+            }
+        });
+}
+
 var yt_api_key = "[KEY GOES HERE]";
+
 //Adds video id to YT Data API link
 function getURL(yt_video_id){
     yt_snippet_endpoint = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + yt_video_id + "&key=" + yt_api_key;
@@ -114,18 +134,6 @@ function onPlayerStateChange(event) {
             });
         count+=1;
     }
-    if(host){
-        $.ajax({
-            url: 'sync',
-            method: 'POST',
-            data: {status : status, host: host, time: timeStamp},
-            success: function(resultText){
-                $('#result').html(resultText);
-            },
-            error : function(err){
-                console.error('Error in hostPlayerStatus() occured!', err);
-            }
-        });
 }
 
 // Function to initiate long polling to perform get requests 
@@ -146,6 +154,7 @@ function longPolling() {
         complete: longPolling
     });
 }
+
 // Functions that change the playback state of the player
 function stopVideo() {
     player.stopVideo();
@@ -185,6 +194,7 @@ function queueVideo(){
         addVideo(3, yt_video_id);
     }
 }
+
 //Changes text of room title element
 function getRoomData(){
     const responsePromise = 
@@ -195,6 +205,7 @@ function getRoomData(){
     commentsListElement.innerHTML = rooms[rooms.length-1].title;
     });
 }
+
 // Function that contains the logic for changing the playback state
 function updatePlayer(status){
     // Compares host status to local player status. 
@@ -222,8 +233,8 @@ function checkDifference(hostTimeStamp){
 // Function to load the title of the current video
 // TODO: Link to Data API to import information from current video
 function loadVideoInfo() {
-    getRoomData()
-    var titleElement = document.getElementById('video-title');
+    getRoomData();
+    var titleElement = document.getElementById('video-info');
     titleElement.innerText = "Title";
 }
 
