@@ -25,102 +25,50 @@
         </ul>
       </div>
       <span id = "room-title"></span>
-    <div class="player-container">
-        <div class="player">
-            <iframe id="iframe-player" src="https://www.youtube.com/embed/QSQwZlRMVAM" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <p1 id="video-title">Title</p1>
-    </div>
 
-  <div id="queue-container">
+        <div class="player-container">
+            <div class="player">
+                <iframe id="iframe-player" src="https://www.youtube.com/embed/QSQwZlRMVAM" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p1 id="video-title">Title</p1>
+        </div>
+
+       <div id="queue-container">
     <div id="form">
     <input type="text" name = "videoId" id="urlInput" />
     <button id="urlSubmit" onclick = "queueVideo()">Add</button>
   </div>
   <div id="queue">
     <div class="video">
-      <div class="thumbnail"></div>
+      <div class = "thumbnail">
+      <img id="firstThumbnail"></img>
+      </div>
       <div class="video-metadata">
-        <div src="avatar.jpg" class="avatar"></div>
+          <span class="title"></span>
+      </div>
+    </div>
+    <div class="video">
+      <div class="thumbnail">
+          <img id="secondThumbnail"></img>
+      </div>
+      <div class="video-metadata">
         <div class="author">
-          <span class="title">Video title goes here</span>
-          <span class="channel">Channel name</span>
-          <div class="secondary-metadata">
-            <span>100K views</span>
-            <span>4 months ago</span>
-          </div>
+          <span class="title"></span>
         </div>
       </div>
     </div>
     <div class="video">
-      <div class="thumbnail"></div>
+      <div class="thumbnail">
+          <img id="thirdThumbnail"></img>
+      </div>
       <div class="video-metadata">
-        <div src="avatar.jpg" class="avatar"></div>
         <div class="author">
-          <span class="title">Video title goes here</span>
-          <span class="channel">Channel name</span>
-          <div class="secondary-metadata">
-            <span>100K views</span>
-            <span>4 months ago</span>
-          </div>
+          <span class="title"></span>
         </div>
       </div>
-    </div>
-    <div class="video">
-      <div class="thumbnail"></div>
-      <div class="video-metadata">
-        <div src="avatar.jpg" class="avatar"></div>
-        <div class="author">
-          <span class="title">Video title goes here</span>
-          <span class="channel">Channel name</span>
-          <div class="secondary-metadata">
-            <span>100K views</span>
-            <span>4 months ago</span>
-          </div>
-        </div>
-      </div>
-  
-    <div id="queue">
-      <form>
-        <input type="text" id="videoLink">
-        <input type="button" id="queueSubmit" value="Add Link">
-      </form>
-      <table>
-        <tr>
-          <td>
-            <img src="thumbnail.jpg" class="thumbnail">
-            <img src="channel.jpg" class="channelImage">
-            <p class="title">Title</p>
-            <br>
-            <p class="channelName">Channel</p>
-            <br>
-            <p class="views">200K Views</p>
-            <p class="timePosted">1 day ago</p>
-          </td>
-          <td>
-            <img src="thumbnail.jpg" class="thumbnail">
-            <img src="channel.jpg" class="channelImage">
-            <p class="title">Title</p>
-            <br>
-            <p class="channelName">Channel</p>
-            <br>
-            <p class="views">200K Views</p>
-            <p class="timePosted">1 day ago</p>
-          </td>
-          <td>
-            <img src="thumbnail.jpg" class="thumbnail">
-            <img src="channel.jpg" class="channelImage">
-            <p class="title">Title</p>
-            <br>
-            <p class="channelName">Channel</p>
-            <br>
-            <p class="views">200K Views</p>
-            <p class="timePosted">1 day ago</p>
-          </td>
-        </tr>
-      </table>
     </div>
   </div>
+</div>  
 </div>
   </body>
 </html>
