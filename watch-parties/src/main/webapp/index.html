@@ -5,23 +5,25 @@
     <title>Watch Parties</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatstyle.css">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="videoPlayer.js"></script>
     <link rel="stylesheet" href="videoPlayer.css">
-    <script type="module" src="script.js"></script>
     <script type="module" src="chatscript.js"></script>
   </head>
   <body onload="loadVideoInfo()">
+      <div id="header">
+          <h1>YouTube Watch Parties</h1>
+      </div>
       <div id="chat">
         <ul id="chatlog">
             <br />
+            <div id="actual-comments"></div>
+            <br />
         </ul>
         <ul id="new-comment">
-                <li><textarea id="submitted-comment"></textarea>
-                <button id="sendButton"><img src="images/sendiconv4.png"></button></li>
-        </ul>
-      </div>
-
+                <li><textarea id="submitted-comment"></textarea></li>
+                <li><button id="sendButton"><img src="images/sendiconv4.png"></button></li>
         </ul>
       </div>
       <span id = "room-title"></span>

@@ -34,7 +34,9 @@ public class ChatReceiverServlet extends HttpServlet {
         long timestamp = System.currentTimeMillis();
         String authorID = "User"; //placeholder for now
 
-        //From here on we make sure the message is stored properly
+        // Add Author ID stuff here
+
+        // From here on we make sure the message is stored properly
         Entity chatEntity = new Entity("Chat");
         chatEntity.setProperty("message", comment);
         chatEntity.setProperty("authorID", authorID);

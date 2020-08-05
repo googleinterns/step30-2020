@@ -38,9 +38,9 @@ public final class Chat {
 
   public String toHTML() {
     if (adminStatus) {
-        return "<br /><li><b class=\"admin\">" + authorID + ": </b>" + message + "</li><br/>";
+        return "<li><b class=\"admin\">" + authorID + ": </b>" + message + "<br /></li>";
     } else {
-        return "<br /><li><b>" + authorID + ": </b>" + message + "</li><br/>";
+        return "<li><b>" + authorID + ": </b>" + message + "</li>";
     }
   }
 
