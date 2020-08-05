@@ -32,7 +32,7 @@ const maxTimeDifFromHost = 1;
 
 // Create the YouTube iFrame player
 function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
+    player = new YT.Player('iframe-player', {
         height: '390',
         width: '640',
         videoId: 'QSQwZlRMVAM',
