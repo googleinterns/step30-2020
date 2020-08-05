@@ -1,5 +1,4 @@
 document.getElementById("sendButton").addEventListener("click", addNewComment);
-var formattedComment = "";
 var timer = window.setInterval(loadComments, 1000); //check comment updates every second
 
 // retrieves comments from the backend, loads using AJAX
@@ -8,7 +7,7 @@ function loadComments() {
   xhttp = new XMLHttpRequest();
   xhttp.addEventListener('load', function() {
     if (this.status == 200) {
-      document.getElementById("chatlog").innerHTML = this.responseText;
+      document.getElementById("actual-comments").innerHTML = this.responseText;
     }
   });
   xhttp.open("GET", "/chatstorage", true);
