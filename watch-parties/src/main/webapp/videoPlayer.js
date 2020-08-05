@@ -64,7 +64,6 @@ function getAvatar(channel_id){
     return 'https://www.googleapis.com/youtube/v3/channels?part=snippet&id=' + channel_id + '&fields=items(id%2Csnippet%2Fthumbnails)&key=' + yt_api_key;
 }
 
-<<<<<<< HEAD
 //Adds video thumbnail, title, and channel info to the queue.
 function addVideo(n, video){
     var index;
@@ -89,6 +88,7 @@ function addVideo(n, video){
     });
     });
 }
+
 // When the player state is changed, the API calls this function
 var count = 0;//position in queue
 function onPlayerStateChange(event) {
@@ -116,7 +116,18 @@ function onPlayerStateChange(event) {
     }
     if(host){
         $.ajax({
-=======
+            url: 'sync',
+            method: 'POST',
+            data: {status : status, host: host, time: timeStamp},
+            success: function(resultText){
+                $('#result').html(resultText);
+            },
+            error : function(err){
+                console.error('Error in hostPlayerStatus() occured!', err);
+            }
+        });
+}
+
 // Function to initiate long polling to perform get requests 
 function longPolling() {
      $.ajax({ 
@@ -135,26 +146,6 @@ function longPolling() {
         complete: longPolling
     });
 }
-
-// Function that sends the host's player status
-function hostPlayerStatus() { 
-    var status = player.getPlayerState();
-    var timeStamp = player.getCurrentTime();
-    
-    $.ajax({
->>>>>>> 1590ac58574ce6998de0e51e29d2a59310f65e3f
-            url: 'sync',
-            method: 'POST',
-            data: {status : status, host: host, time: timeStamp},
-            success: function(resultText){
-                $('#result').html(resultText);
-            },
-            error : function(err){
-                console.error('Error in hostPlayerStatus() occured!', err);
-            }
-        });
-}
-
 // Functions that change the playback state of the player
 function stopVideo() {
     player.stopVideo();
