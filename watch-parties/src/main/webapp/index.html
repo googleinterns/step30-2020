@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
- <head>
+  <head>
     <meta charset="UTF-8">
     <title>Watch Parties</title>
     <link rel="stylesheet" href="style.css">
@@ -12,63 +12,57 @@
     <script type="module" src="chatscript.js"></script>
   </head>
   <body onload="loadVideoInfo()">
-      <div id="player"></div>
-
-        <div id="video-info">
-
-            <h2 id="video-title"></h2>
-
-        </div>   
-  
-    <div id="queue">
-      <form>
-        <input type="text" id="videoLink">
-        <input type="button" id="queueSubmit" value="Add Link">
-      </form>
-      <table>
-        <tr>
-          <td>
-            <img src="thumbnail.jpg" class="thumbnail">
-            <img src="channel.jpg" class="channelImage">
-            <p class="title">Title</p>
-            <br>
-            <p class="channelName">Channel</p>
-            <br>
-            <p class="views">200K Views</p>
-            <p class="timePosted">1 day ago</p>
-          </td>
-          <td>
-            <img src="thumbnail.jpg" class="thumbnail">
-            <img src="channel.jpg" class="channelImage">
-            <p class="title">Title</p>
-            <br>
-            <p class="channelName">Channel</p>
-            <br>
-            <p class="views">200K Views</p>
-            <p class="timePosted">1 day ago</p>
-          </td>
-          <td>
-            <img src="thumbnail.jpg" class="thumbnail">
-            <img src="channel.jpg" class="channelImage">
-            <p class="title">Title</p>
-            <br>
-            <p class="channelName">Channel</p>
-            <br>
-            <p class="views">200K Views</p>
-            <p class="timePosted">1 day ago</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-    
-    <div id=“chat” style="float:right;">
+      <div id="chat">
         <ul id="chatlog">
             <br />
         </ul>
         <ul id="new-comment">
-            <li><textarea id="submitted-comment" style="background-color:#faf2f0;width:336px;"></textarea>
-            <button style="background-color:#faf2f0;border-width:1px;" id="sendButton" method="GET" action="chatmessages"><img src="images/sendicon.png" style="width:40px;height:40px;padding:0px;"></button></li>
+                <li><textarea id="submitted-comment"></textarea>
+                <button id="sendButton"><img src="images/sendiconv4.png"></button></li>
         </ul>
       </div>
+
+        </ul>
+      </div>
+      <span id = "room-title"></span>
+      <div id="player"></div>
+
+       <div id="queue-container">
+    <div id="form">
+    <input type="text" name = "videoId" id="urlInput" />
+    <button id="urlSubmit" onclick = "queueVideo()">Add</button>
+  </div>
+  <div id="queue">
+    <div class="video">
+      <div class = "thumbnail">
+      <img id="firstThumbnail"></img>
+      </div>
+      <div class="video-metadata">
+          <span class="title"></span>
+      </div>
+    </div>
+    <div class="video">
+      <div class="thumbnail">
+          <img id="secondThumbnail"></img>
+      </div>
+      <div class="video-metadata">
+        <div class="author">
+          <span class="title"></span>
+        </div>
+      </div>
+    </div>
+    <div class="video">
+      <div class="thumbnail">
+          <img id="thirdThumbnail"></img>
+      </div>
+      <div class="video-metadata">
+        <div class="author">
+          <span class="title"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
+</div>
   </body>
 </html>
