@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+ <head>
     <meta charset="UTF-8">
     <title>Watch Parties</title>
     <link rel="stylesheet" href="style.css">
@@ -26,16 +26,15 @@
                 <li><button id="sendButton"><img src="images/sendiconv4.png"></button></li>
         </ul>
       </div>
-      <span id = "room-title"></span>
-
-        <div class="player-container">
+         <span id="room-title"></span>
+        <br/>
+      <div class="player-container">
             <div class="player">
-                <iframe id="iframe-player" src="https://www.youtube.com/embed/QSQwZlRMVAM" frameborder="0" allowfullscreen></iframe>
+                <div id="iframe-player"></div>
             </div>
-            <p1 id="video-title">Title</p1>
+            <div id="video-info">
         </div>
-
-       <div id="queue-container">
+  <div id="queue-container">
     <div id="form">
     <input type="text" name = "videoId" id="urlInput" />
     <button id="urlSubmit" onclick = "queueVideo()">Add</button>
@@ -46,31 +45,44 @@
       <img id="firstThumbnail"></img>
       </div>
       <div class="video-metadata">
-          <span class="title"></span>
+        <img id = "firstAvatar" class="avatar"></img>
+        <div class="author">
+          <span id = "firstTitle" class="title"></span>
+          <div class = "channelData"> 
+          <span id = "firstChannel" class="channel"></span>
+          </div>
+          </div>
       </div>
     </div>
     <div class="video">
-      <div class="thumbnail">
-          <img id="secondThumbnail"></img>
+      <div class = "thumbnail">
+      <img id="secondThumbnail"></img>
       </div>
       <div class="video-metadata">
+        <img id = "secondAvatar" class="avatar"></img>
         <div class="author">
-          <span class="title"></span>
-        </div>
+          <span id = "secondTitle" class="title"></span>
+          <div class = "channelData"> 
+          <span id = "secondChannel" class="channel"></span>
+          </div>
+          </div>
       </div>
     </div>
     <div class="video">
-      <div class="thumbnail">
-          <img id="thirdThumbnail"></img>
+      <div class = "thumbnail">
+      <img id="thirdThumbnail"></img>
       </div>
       <div class="video-metadata">
+        <img id = "thirdAvatar" class="avatar"></img>
         <div class="author">
-          <span class="title"></span>
-        </div>
+          <span id = "thirdTitle" class="title"></span>
+          <div class = "channelData"> 
+          <span id = "thirdChannel" class="channel"></span>
+          </div>
+          </div>
       </div>
     </div>
   </div>
-</div>  
-</div>
+</div>   
   </body>
 </html>

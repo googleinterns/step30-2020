@@ -1,3 +1,4 @@
+
 // Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,7 +39,6 @@ public void doGet(HttpServletRequest request, HttpServletResponse response) thro
         videos.add(new Video(entity));
     }
     Gson gson = new Gson();
-
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(videos));
   }
