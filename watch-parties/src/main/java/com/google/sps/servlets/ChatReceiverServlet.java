@@ -42,10 +42,8 @@ public class ChatReceiverServlet extends HttpServlet {
         
         Query query = new Query("Member").addFilter("user", Query.FilterOperator.EQUAL, userService.getCurrentUser());
         PreparedQuery results = datastore.prepare(query);
-        for (Entity entity : results.asIterable()) {
-            if(entity.getProperty("user").equals(userService.getCurrentUser()))
-            authorID=entity.getProperty("nickname").toString();
-        } 
+        Entity entity = results.asSingleEntity();
+        authorID = entity.getProperty("nickname").toString(); 
 
         // From here on we make sure the message is stored properly
         Entity chatEntity = new Entity("Chat");
