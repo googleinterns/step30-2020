@@ -31,6 +31,8 @@ import com.google.appengine.api.users.UserServiceFactory;
  
 @WebServlet("/chatstorer")
 public class ChatReceiverServlet extends HttpServlet {
+    UserService userService = UserServiceFactory.getUserService();
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
  
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -38,9 +40,7 @@ public class ChatReceiverServlet extends HttpServlet {
         long timestamp = System.currentTimeMillis();
         String authorID = "User"; //placeholder for now
         
-        Query query = new Query("Member");
-        UserService userService = UserServiceFactory.getUserService();
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        Query query = new Query("Member").addFilter("user", Query.FilterOperator.EQUAL, userService.getCurrentUser());
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()) {
             if(entity.getProperty("user").equals(userService.getCurrentUser()))
