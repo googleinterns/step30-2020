@@ -23,9 +23,15 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.sps.data.Chat;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
  
 @WebServlet("/chatstorer")
 public class ChatReceiverServlet extends HttpServlet {
+    UserService userService = UserServiceFactory.getUserService();
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
  
     @Override
@@ -33,8 +39,11 @@ public class ChatReceiverServlet extends HttpServlet {
         String comment = request.getParameter("submitted-comment");
         long timestamp = System.currentTimeMillis();
         String authorID = "User"; //placeholder for now
-
-        // Add Author ID stuff here
+        
+        Query query = new Query("Member").addFilter("user", Query.FilterOperator.EQUAL, userService.getCurrentUser());
+        PreparedQuery results = datastore.prepare(query);
+        Entity entity = results.asSingleEntity();
+        authorID = entity.getProperty("nickname").toString(); 
 
         // From here on we make sure the message is stored properly
         Entity chatEntity = new Entity("Chat");
@@ -43,7 +52,6 @@ public class ChatReceiverServlet extends HttpServlet {
         chatEntity.setProperty("timestamp", timestamp);
 
         // Store chat message
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         datastore.put(chatEntity);
         response.setStatus(HttpServletResponse.SC_OK); 
     }    

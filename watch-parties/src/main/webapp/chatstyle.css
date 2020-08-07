@@ -43,7 +43,7 @@ li > textarea {
     background-color:#333333;
     width:336px;
     color: #faf2f0;
-    height:50px;
+    height:45px;
 }
 
 li > button {
@@ -61,10 +61,14 @@ button > img {
 
 #new-comment > li {
     vertical-align: top;
-    background-color:#faf2f0;
+    background-color:#333333;
     width: 336px;
     list-style-type: none;
     color:#faf2f0;
     display: inline;
     margin-left: 0px;
+}
+
+#header {
+    margin-left: 60px;
 }
